@@ -54,16 +54,19 @@ void* lpwGetWindowUserPtr(LpwWindow window)
     return window->user_ptr;
 }
 
-LpwVec2_i32 lpwGetWindowPos(LpwWindow window)
+void lpwGetWindowPos(LpwWindow window, LpwVec2_i32* dst_ptr)
 {
     assert(window != LPW_NULL_HANDLE);
-    return window->info.pos;
+    assert(dst_ptr != NULL);
+    dst_ptr->x = window->info.pos.x;
+    dst_ptr->y = window->info.pos.y;
 }
-
-LpwVec2_ui32 lpwGetWindowSize(LpwWindow window)
+void lpwGetWindowSize(LpwWindow window, LpwVec2_ui32* dst_ptr)
 {
     assert(window != LPW_NULL_HANDLE);
-    return window->info.size;
+    assert(dst_ptr != NULL);
+    dst_ptr->x = window->info.size.x;
+    dst_ptr->y = window->info.size.y;
 }
 
 const char* lpwGetWindowName(LpwWindow window)
