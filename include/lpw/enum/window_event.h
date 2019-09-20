@@ -1,0 +1,10 @@
+#pragma once
+
+typedef enum LpwEnumWindowEvent
+{
+    LPW_ENUM_WINDOW_EVENT_NULL,
+    LPW_ENUM_WINDOW_EVENT_POS,
+    LPW_ENUM_WINDOW_EVENT_SIZE,
+    //LPW_ENUM_WINDOW_EVENT_,
+    LPW_ENUM_WINDOW_EVENT_MAX_ENUM,
+}LpwEnumWindowEvent;
