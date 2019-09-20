@@ -1,0 +1,9 @@
+#pragma once
+
+typedef enum LpwEnumKeyboardKeyState
+{
+    LPW_ENUM_KEYBOARD_KEY_STATE_NULL,
+    LPW_ENUM_KEYBOARD_KEY_STATE_ACTIVE,
+    LPW_ENUM_KEYBOARD_KEY_STATE_INACTIVE,
+    LPW_ENUM_KEYBOARD_KEY_STATE_MAX_ENUM,
+}LpwEnumKeyboardKeyState;
