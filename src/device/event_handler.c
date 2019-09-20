@@ -82,28 +82,28 @@ LRESULT CALLBACK _lpwDeviceEventHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
 
         case WM_XBUTTONDOWN:{
             LpwEnumMouseButton button = LPW_ENUM_MOUSE_BUTTON_NULL;
-            if ((HIWORD(wParam)) == XBUTTON1)
+            if ((HIWORD(wParam)) == XBUTTON2)
                 button = LPW_ENUM_MOUSE_BUTTON_FORWARD;
             else 
-            if ((HIWORD(wParam)) == XBUTTON2)
+            if ((HIWORD(wParam)) == XBUTTON1)
                 button = LPW_ENUM_MOUSE_BUTTON_BACKWARD;
             lpwProcessMouseButtonEvent(mouse, button, LPW_ENUM_MOUSE_BUTTON_EVENT_PRESS);
         }break;
         case WM_XBUTTONUP:{
             LpwEnumMouseButton button = LPW_ENUM_MOUSE_BUTTON_NULL;
-            if ((HIWORD(wParam)) == XBUTTON1)
+            if ((HIWORD(wParam)) == XBUTTON2)
                 button = LPW_ENUM_MOUSE_BUTTON_FORWARD;
             else 
-            if ((HIWORD(wParam)) == XBUTTON2)
+            if ((HIWORD(wParam)) == XBUTTON1)
                 button = LPW_ENUM_MOUSE_BUTTON_BACKWARD;
             lpwProcessMouseButtonEvent(mouse, button, LPW_ENUM_MOUSE_BUTTON_EVENT_RELEASE);
         }break;
         case WM_XBUTTONDBLCLK:{
             LpwEnumMouseButton button = LPW_ENUM_MOUSE_BUTTON_NULL;
-            if ((HIWORD(wParam)) == XBUTTON1)
+            if ((HIWORD(wParam)) == XBUTTON2)
                 button = LPW_ENUM_MOUSE_BUTTON_FORWARD;
             else 
-            if ((HIWORD(wParam)) == XBUTTON2)
+            if ((HIWORD(wParam)) == XBUTTON1)
                 button = LPW_ENUM_MOUSE_BUTTON_BACKWARD;
             lpwProcessMouseButtonEvent(mouse, button, LPW_ENUM_MOUSE_BUTTON_EVENT_DOUBLE);
         }break;
@@ -111,12 +111,15 @@ LRESULT CALLBACK _lpwDeviceEventHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
         case WM_MOUSEMOVE:{
             if(mouse != LPW_NULL_HANDLE)
             {
-                mouse->info.pre_pos.x = mouse->info.pos.x;
-                mouse->info.pre_pos.y = mouse->info.pos.y;
-                mouse->info.pos.x = LOWORD(lParam);
-                mouse->info.pos.y = HIWORD(lParam);
-                if(mouse->info.pfn_callback_list.pfn_pos_callback != NULL){
-                    mouse->info.pfn_callback_list.pfn_pos_callback(mouse, mouse->info.pos.x, mouse->info.pos.y);
+                //if((mouse->info.pos.x != LOWORD(lParam)) && (mouse->info.pos.y != HIWORD(lParam)))
+                {
+                    mouse->info.pre_pos.x = mouse->info.pos.x;
+                    mouse->info.pre_pos.y = mouse->info.pos.y;
+                    mouse->info.pos.x = LOWORD(lParam);
+                    mouse->info.pos.y = HIWORD(lParam);
+                    if(mouse->info.pfn_callback_list.pfn_pos_callback != NULL){
+                        mouse->info.pfn_callback_list.pfn_pos_callback(mouse, mouse->info.pos.x, mouse->info.pos.y);
+                    }
                 }
             }
         }break;
