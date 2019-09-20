@@ -6,6 +6,7 @@
 
 #include <assert.h>
 #include <malloc.h>
+#include <string.h>
 
 void _lpwCreateNativeWindow(LpwWindow window);
 void _lpwDestroyNativeWindow(LpwWindow window);
@@ -226,5 +227,113 @@ void _lpwDestroyNativeWindow(LpwWindow window)
 
 #elif defined( LPW_MACRO_USE_PLATFORM_SDK_XCB )
 
+void _lpwCreateNativeWindow(LpwWindow window)
+{
+    LpwPlatformData platform_data = window->root_device->platform_data;
+    platform_data->connection = xcb_connect(NULL, NULL);
+
+    /* get the first screen */
+    platform_data->screen = xcb_setup_roots_iterator(xcb_get_setup(platform_data->connection)).data;
+
+    /* create the window */
+    uint32_t mask = XCB_CW_BACK_PIXEL | XCB_CW_EVENT_MASK;
+    uint32_t mask_values[2] = {
+        platform_data->screen->white_pixel,
+        //XCB_EVENT_MASK_EXPOSURE |
+        //XCB_EVENT_MASK_VISIBILITY_CHANGE | 
+        XCB_EVENT_MASK_POINTER_MOTION |          //mouse move
+        XCB_EVENT_MASK_STRUCTURE_NOTIFY | //move window, 
+        //XCB_EVENT_MASK_PROPERTY_CHANGE | 
+        XCB_EVENT_MASK_BUTTON_PRESS          |   //include click close window
+        XCB_EVENT_MASK_BUTTON_RELEASE | 
+        XCB_EVENT_MASK_KEY_PRESS |
+        XCB_EVENT_MASK_KEY_RELEASE |
+        XCB_EVENT_MASK_KEYMAP_STATE |
+        0 
+    };
+
+    platform_data->window = xcb_generate_id(platform_data->connection);
+
+    xcb_create_window(platform_data->connection,
+                      0, /* depth               */
+                      platform_data->window,
+                      platform_data->screen->root,                  /* parent window       */
+                      window->info.pos.x,       /* x                   */
+                      window->info.pos.y,       /* y                   */
+                      window->info.size.x,  /* width               */
+                      window->info.size.y, /* height              */
+                      10,                            /* border_width        */
+                      XCB_WINDOW_CLASS_INPUT_OUTPUT, /* class               */
+                      platform_data->screen->root_visual,           /* visual              */
+                      mask, mask_values);                      /* masks, not used     */
+
+    /* set the title of the window */
+    xcb_change_property(platform_data->connection,
+                        XCB_PROP_MODE_REPLACE,
+                        platform_data->window,
+                        XCB_ATOM_WM_NAME,
+                        XCB_ATOM_STRING,
+                        16,
+                        strlen(window->info.name),
+                        window->info.name);
+
+    /* set the title of the window icon */
+
+    char *iconTitle = "Hello World ! (iconified)";
+    xcb_change_property(platform_data->connection,
+                        XCB_PROP_MODE_REPLACE,
+                        platform_data->window,
+                        XCB_ATOM_WM_ICON_NAME,
+                        XCB_ATOM_STRING,
+                        16,
+                        strlen(iconTitle),
+                        iconTitle);
+
+    xcb_intern_atom_cookie_t cookie = xcb_intern_atom( platform_data->connection, 1, 12, "WM_PROTOCOLS" );
+	xcb_intern_atom_reply_t *reply = xcb_intern_atom_reply( platform_data->connection, cookie, 0 );
+
+	xcb_intern_atom_cookie_t cookie2 = xcb_intern_atom( platform_data->connection, 0, 16, "WM_DELETE_WINDOW" );
+    
+    platform_data->atom_window_reply = xcb_intern_atom_reply( platform_data->connection, cookie2, 0 );
+		
+	xcb_change_property( platform_data->connection, XCB_PROP_MODE_REPLACE, platform_data->window,
+		( *reply ).atom, 4, 32, 1,
+		&( *platform_data->atom_window_reply ).atom );
+	free( reply );
+
+    /* map the window on the screen */
+    xcb_map_window(platform_data->connection, platform_data->window);
+    xcb_flush(platform_data->connection);
+
+    /* Predictable autorepeat is essential for correct input management
+	 * When a key is hold down :
+	 * - Without predictable autorepeat, the application will receive :
+	 *   "key_pressed", "key_released", "key_pressed", "key_released"
+	 * - With predictable autorepeat, the application will receive :
+	 *   "key_pressed, "key_pressed", ..., "key_released"
+	 * Which helps differentiate between autorepeat and the same key
+	 * actually pressed multiple times.
+	 */
+	xcb_xkb_use_extension(platform_data->connection, 1, 0);
+	xcb_xkb_per_client_flags_cookie_t repeat = xcb_xkb_per_client_flags(
+		platform_data->connection,
+		XCB_XKB_ID_USE_CORE_KBD,
+		XCB_XKB_PER_CLIENT_FLAG_DETECTABLE_AUTO_REPEAT,
+		XCB_XKB_PER_CLIENT_FLAG_DETECTABLE_AUTO_REPEAT,
+		0,0,0
+	);
+    xcb_xkb_per_client_flags_reply_t* rep = xcb_xkb_per_client_flags_reply(platform_data->connection,repeat,0);
+}
+
+void _lpwDestroyNativeWindow(LpwWindow window)
+{
+    LpwPlatformData platform_data = window->root_device->platform_data;
+    xcb_destroy_window(
+        platform_data->connection,
+        platform_data->window);
+    xcb_disconnect(platform_data->connection);
+
+    free(platform_data->atom_window_reply);
+}
 
 #endif
