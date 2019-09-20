@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "device_prototype.h": "c",
+        "window.h": "c"
+    }
+}

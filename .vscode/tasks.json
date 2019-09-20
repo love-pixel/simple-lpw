@@ -1,0 +1,54 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "gcc.exe build active file",
+            "command": "C:\\MinGW\\bin\\gcc.exe",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "C:\\MinGW\\bin"
+            }
+        },
+        {
+            "label": "create_window",
+            "type": "shell",
+            "command": "C:\\MinGW\\bin\\gcc.exe",
+            "args":[
+                "-g",
+                "src\\device\\device.c",
+                "src\\device\\event_handler.c",
+                "src\\device\\window\\window.c",
+                "example\\window\\create_window.c",
+                "-o",
+                "example\\a.exe",
+                "-D",
+                "_DEBUG",
+                "-lgdi32"
+            ]
+        },
+        {
+            "label": "test_mouse",
+            "type": "shell",
+            "command": "C:\\MinGW\\bin\\gcc.exe",
+            "args":[
+                "-g",
+                "src\\device\\device.c",
+                "src\\device\\event_handler.c",
+                "src\\device\\window\\window.c",
+                "src\\device\\mouse\\mouse.c",
+                "example\\mouse\\test_mouse.c",
+                "-o",
+                "example\\a.exe",
+                "-D",
+                "_DEBUG",
+                "-lgdi32"
+            ]
+        }
+    ],
+    "version": "2.0.0"
+}
