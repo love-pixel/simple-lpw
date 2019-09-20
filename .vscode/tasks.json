@@ -1,21 +1,7 @@
 {
     "tasks": [
         {
-            "type": "shell",
-            "label": "gcc.exe build active file",
-            "command": "C:\\MinGW\\bin\\gcc.exe",
-            "args": [
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
-            ],
-            "options": {
-                "cwd": "C:\\MinGW\\bin"
-            }
-        },
-        {
-            "label": "create_window",
+            "label": "create_window-windows",
             "type": "shell",
             "command": "C:\\MinGW\\bin\\gcc.exe",
             "args":[
@@ -32,7 +18,25 @@
             ]
         },
         {
-            "label": "test_mouse",
+            "label": "create_window-linux",
+            "type": "shell",
+            "command": "gcc",
+            "args":[
+                "-g",
+                "src/device/device.c",
+                "src/device/event_handler.c",
+                "src/device/window/window.c",
+                "example/window/create_window.c",
+                "-o",
+                "example/a.out",
+                "-D",
+                "_DEBUG",
+                "-lxcb",
+                "-lxcb-xkb"
+            ]
+        },
+        {
+            "label": "test_mouse-windows",
             "type": "shell",
             "command": "C:\\MinGW\\bin\\gcc.exe",
             "args":[
@@ -47,6 +51,25 @@
                 "-D",
                 "_DEBUG",
                 "-lgdi32"
+            ]
+        },
+        {
+            "label": "test_mouse-linux",
+            "type": "shell",
+            "command": "gcc",
+            "args":[
+                "-g",
+                "src/device/device.c",
+                "src/device/event_handler.c",
+                "src/device/window/window.c",
+                "src/device/mouse/mouse.c",
+                "example/mouse/test_mouse.c",
+                "-o",
+                "example/a.out",
+                "-D",
+                "_DEBUG",
+                "-lxcb",
+                "-lxcb-xkb"
             ]
         }
     ],
