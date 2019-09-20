@@ -71,6 +71,25 @@
                 "-lxcb",
                 "-lxcb-xkb"
             ]
+        },
+        {
+            "label": "test_keyboard-windows",
+            "type": "shell",
+            "command": "C:\\MinGW\\bin\\gcc.exe",
+            "args":[
+                "-g",
+                "src\\device\\device.c",
+                "src\\device\\event_handler.c",
+                "src\\device\\window\\window.c",
+                "src\\device\\mouse\\mouse.c",
+                "src\\device\\keyboard\\keyboard.c",
+                "example\\keyboard\\test_keyboard.c",
+                "-o",
+                "example\\a.exe",
+                "-D",
+                "_DEBUG",
+                "-lgdi32"
+            ]
         }
     ],
     "version": "2.0.0"
