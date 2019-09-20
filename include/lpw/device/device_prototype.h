@@ -6,7 +6,7 @@
 
 #include "window/window.h"
 #include "mouse/mouse.h"
-//#include "keyboard/keyboard.h"
+#include "keyboard/keyboard.h"
 
 typedef struct LPW_MAKE_HANDLE_PROTOTYPE_NAME(LpwDevice)
 {
@@ -15,5 +15,5 @@ typedef struct LPW_MAKE_HANDLE_PROTOTYPE_NAME(LpwDevice)
     LpwPlatformData platform_data;
     LpwWindow       window;
     LpwMouse        mouse;
-    //LpwKeyboard     keyboard;
+    LpwKeyboard     keyboard;
 }LPW_MAKE_HANDLE_PROTOTYPE_NAME(LpwDevice);
