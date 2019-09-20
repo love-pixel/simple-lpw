@@ -19,7 +19,13 @@ LpwMouse lpwCreateMouse(LpwDevice device, const LpwMouseCreateInfo* ci_ptr)
     for(LpwEnumMouseButton button = LPW_ENUM_MOUSE_BUTTON_NULL; button < LPW_ENUM_MOUSE_BUTTON_MAX_ENUM; ++button)
     {
         mouse->info.button_state_table[button] = LPW_ENUM_MOUSE_BUTTON_STATE_NULL;
+#if defined( LPW_MACRO_USE_PLATFORM_SDK_XCB )
+        mouse->info.pre_time_table[button] = 0;
+#endif
     }
+#if defined( LPW_MACRO_USE_PLATFORM_SDK_XCB )
+    mouse->info.time_interval = 250;
+#endif
     mouse->user_ptr = NULL;
     mouse->root_device = device;
     if(ci_ptr != NULL)
@@ -47,36 +53,27 @@ LpwEnumMouseButtonState lpwGetMouseButtonState(LpwMouse mouse, LpwEnumMouseButto
     return mouse->info.button_state_table[button];
 }
 
-LpwVec2_i32 lpwGetMousePos(LpwMouse mouse, LpwEnumMousePosFlag flag)
+void lpwGetMousePos(LpwMouse mouse, LpwEnumMousePosFlag flag, LpwVec2_i32* pos)
 {
     assert(mouse != LPW_NULL_HANDLE);
+    assert(pos != NULL);
     switch(flag)
     {
         case LPW_ENUM_MOUSE_POS_FLAG_NULL:
         case LPW_ENUM_MOUSE_POS_FLAG_CURRENT:{
-            LpwVec2_i32 vec2;
-            vec2.x = (int32_t)mouse->info.pos.x;
-            vec2.y = (int32_t)mouse->info.pos.y;
-            return vec2;
-        }
+            pos->x = (int32_t)mouse->info.pos.x;
+            pos->y = (int32_t)mouse->info.pos.y;
+        }break;
         case LPW_ENUM_MOUSE_POS_FLAG_PREVIOUS:{
-            LpwVec2_i32 vec2;
-            vec2.x = (int32_t)mouse->info.pre_pos.x;
-            vec2.y = (int32_t)mouse->info.pre_pos.y;
-            return vec2;
-        }
+            pos->x = (int32_t)mouse->info.pre_pos.x;
+            pos->y = (int32_t)mouse->info.pre_pos.y;
+        }break;
         case LPW_ENUM_MOUSE_POS_FLAG_DIFFERENCE: {
-            LpwVec2_i32 vec2;
-            vec2.x = (int32_t)(mouse->info.pos.x - mouse->info.pre_pos.x);
-            vec2.y = (int32_t)(mouse->info.pos.y - mouse->info.pre_pos.y);
-            return vec2;
-        }
+            pos->x = (int32_t)(mouse->info.pos.x - mouse->info.pre_pos.x);
+            pos->y = (int32_t)(mouse->info.pos.y - mouse->info.pre_pos.y);
+        }break;
         default : assert(0);
     }
-    LpwVec2_i32 vec2;
-    vec2.x = 0;
-    vec2.y = 0;
-    return vec2;
 }
 
 void lpwSetMouseUserPtr(LpwMouse mouse, const void* src_ptr)
@@ -154,3 +151,11 @@ void lpwProcessMouseButtonEvent(LpwMouse mouse, LpwEnumMouseButton button, LpwEn
         }
     }
 }
+
+#if defined( LPW_MACRO_USE_PLATFORM_SDK_XCB )
+void _lpwPlatformPrivateSetMouseButtonDoubleClickTimeInterval_XCB(LpwMouse mouse, uint32_t time_interval)
+{
+    assert(mouse != LPW_NULL_HANDLE);
+    mouse->info.time_interval = time_interval;
+}
+#endif
