@@ -30,7 +30,7 @@ void lpwDestroyMouse(LpwMouse mouse);
 
 LpwEnumMouseButtonState lpwGetMouseButtonState(LpwMouse mouse, LpwEnumMouseButton button);
 
-LpwVec2_i32 lpwGetMousePos(LpwMouse mouse, LpwEnumMousePosFlag flag);
+void lpwGetMousePos(LpwMouse mouse, LpwEnumMousePosFlag flag, LpwVec2_i32* pos);
 
 void lpwSetMouseUserPtr(LpwMouse mouse, const void* src_ptr);
 void* lpwGetMouseUserPtr(LpwMouse mouse);
@@ -40,3 +40,13 @@ void* lpwGetMousePfnCallback(LpwMouse mouse, LpwEnumMouseEvent event);
 
 LpwMouse lpwGetMouse(LpwDevice device);
 LpwDevice lpwGetDeviceFromMouse(LpwMouse mouse);
+
+//#include "../../macro/platform.h"
+#include "../../macro/platform_sdk.h"
+#if defined( LPW_MACRO_USE_PLATFORM_SDK_XCB )
+void _lpwPlatformPrivateSetMouseButtonDoubleClickTimeInterval_XCB(LpwMouse mouse, uint32_t time_interval);
+#define lpwPrivateSetMouseTimeInterval(mouse, time_interval) \
+    _lpwPlatformPrivateSetMouseButtonDoubleClickTimeInterval_XCB(mouse, time_interval)
+#else
+#define lpwPrivateSetMouseTimeInterval(mouse, time_interval)
+#endif

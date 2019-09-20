@@ -30,7 +30,7 @@ int main()
     LpwWindow window = lpwCreateWindow(device, &window_ci);
 
     lpwSetWindowUserPtr(window, "Hello Ptr");
-    printf("%s\n", lpwGetWindowUserPtr(window));
+    printf("%s\n", (char*)lpwGetWindowUserPtr(window));
 
     lpwSetWindowPfnCallback(window, LPW_ENUM_WINDOW_EVENT_POS, windowPosCallback);
     lpwSetWindowPfnCallback(window, LPW_ENUM_WINDOW_EVENT_SIZE, windowSizeCallback);
@@ -40,8 +40,8 @@ int main()
         lpwProcessEventByPoll(device);
     }
     lpwDestroyWindow(window);
-    printf("%s\n", lpwGetWindowUserPtr(window));
+    printf("%s\n", (char*)lpwGetWindowUserPtr(window));
     lpwDestroyDevice(device);
-    system("pause");
+    //system("pause");
     return 0;
 }

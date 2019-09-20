@@ -9,4 +9,8 @@ LRESULT CALLBACK _lpwDeviceEventHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
 
 #elif defined( LPW_MACRO_USE_PLATFORM_SDK_XCB )
 
+#include "device.h"
+
+void _lpwDeviceEventHandler(const xcb_generic_event_t* xcb_event, LpwDevice device);
+
 #endif

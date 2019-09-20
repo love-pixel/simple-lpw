@@ -17,7 +17,11 @@ void windowSizeCallback(LpwWindow window, uint32_t x, uint32_t y)
 
 void mousePosCallback(LpwMouse mouse, uint32_t x, uint32_t y)
 {
-    printf("Mouse Callback: Pos(%d,%d)\n",x,y);
+    LpwVec2_i32 pre_pos;
+    lpwGetMousePos(mouse, LPW_ENUM_MOUSE_POS_FLAG_PREVIOUS, &pre_pos);
+    LpwVec2_i32 dif_pos;
+    lpwGetMousePos(mouse, LPW_ENUM_MOUSE_POS_FLAG_DIFFERENCE, &dif_pos);
+    printf("Mouse Callback: Pos(%d,%d), PrePos(%d,%d), DifPos(%d,%d)\n",x,y,pre_pos.x, pre_pos.y, dif_pos.x, dif_pos.y);
 }
 
 void mouseButtonCallback(LpwMouse mouse, LpwEnumMouseButton button, LpwEnumMouseButtonEvent event)
@@ -71,7 +75,7 @@ int main()
     LpwMouse mouse = lpwCreateMouse(device, NULL);
 
     lpwSetWindowUserPtr(window, "Hello Ptr");
-    printf("%s\n", lpwGetWindowUserPtr(window));
+    printf("%s\n", (char*)lpwGetWindowUserPtr(window));
 
     lpwSetWindowPfnCallback(window, LPW_ENUM_WINDOW_EVENT_POS, windowPosCallback);
     lpwSetWindowPfnCallback(window, LPW_ENUM_WINDOW_EVENT_SIZE, windowSizeCallback);
@@ -81,13 +85,15 @@ int main()
     lpwSetMousePfnCallback(mouse, LPW_ENUM_MOUSE_EVENT_WHEEL, mouseWheelCallback);
     //lpwSetMousePfnCallback(mouse, LPW_ENUM_MOUSE_EVENT_, mouseCallback);
 
+    lpwPrivateSetMouseTimeInterval(mouse, 250);
+
     while(lpwIsWindowActive(window) == LPW_TRUE)
     {
         lpwProcessEventByPoll(device);
     }
     lpwDestroyWindow(window);
-    printf("%s\n", lpwGetWindowUserPtr(window));
+    printf("%s\n", (char*)lpwGetWindowUserPtr(window));
     lpwDestroyDevice(device);
-    system("pause");
+    //system("pause");
     return 0;
 }
