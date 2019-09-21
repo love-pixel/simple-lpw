@@ -152,6 +152,10 @@ LRESULT CALLBACK _lpwDeviceEventHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
         //keyboard
         case WM_KEYDOWN:
         case WM_SYSKEYDOWN:{
+            if(lpw_global_platform_keyboard_key_code_callback != NULL)
+            {
+                lpw_global_platform_keyboard_key_code_callback(wParam);
+            }
             if(keyboard != LPW_NULL_HANDLE)
             {
                 LpwEnumKeyboardKey key = lpw_global_keyboard_key_table[wParam];
@@ -196,6 +200,7 @@ void _lpwDeviceEventHandler(const xcb_generic_event_t* xcb_event, LpwDevice devi
     uint8_t message = xcb_event->response_type & ~0x80;//make sure it's value in 0~127
     LpwWindow window = device->window;
     LpwMouse mouse = device->mouse;
+    LpwKeyboard keyboard = device->keyboard;
     switch(message)
     {
         //window
@@ -337,6 +342,48 @@ void _lpwDeviceEventHandler(const xcb_generic_event_t* xcb_event, LpwDevice devi
                 }
             }
         }break;//mouse move
+
+        //keyboard
+        case XCB_KEY_PRESS:{
+            if(lpw_global_platform_keyboard_key_code_callback != NULL)
+            {
+                xcb_key_press_event_t *key_event = (xcb_key_press_event_t*)xcb_event;
+                lpw_global_platform_keyboard_key_code_callback(key_event->detail);
+            }
+            if(keyboard != LPW_NULL_HANDLE)
+            {
+                xcb_key_press_event_t *key_event = (xcb_key_press_event_t*)xcb_event;
+                LpwEnumKeyboardKey key = lpw_global_keyboard_key_table[key_event->detail];
+                if( (keyboard->info.pfn_callback_list.pfn_key_callback != NULL) &&
+                    (keyboard->info.key_state_table[key] != LPW_ENUM_KEYBOARD_KEY_STATE_ACTIVE))
+                {
+                    clock_t current_time = clock();
+                    clock_t time_interval = current_time - keyboard->info.pre_time_table[key];
+                    if( (time_interval < keyboard->info.time_interval) && (time_interval > 0))
+                    {
+                        keyboard->info.pfn_callback_list.pfn_key_callback(keyboard, key, LPW_ENUM_KEYBOARD_KEY_EVENT_DOUBLE);
+                    }
+                    else
+                    {
+                        keyboard->info.pfn_callback_list.pfn_key_callback(keyboard, key, LPW_ENUM_KEYBOARD_KEY_EVENT_PRESS);
+                    }
+                    keyboard->info.pre_time_table[key] = current_time;
+                }
+                keyboard->info.key_state_table[key] = LPW_ENUM_KEYBOARD_KEY_STATE_ACTIVE;
+            }
+        }break;
+        case XCB_KEY_RELEASE:{
+            if(keyboard != LPW_NULL_HANDLE)
+            {
+                xcb_key_press_event_t *key_event = (xcb_key_press_event_t*)xcb_event;
+                LpwEnumKeyboardKey key = lpw_global_keyboard_key_table[key_event->detail];
+                keyboard->info.key_state_table[key] = LPW_ENUM_KEYBOARD_KEY_STATE_INACTIVE;
+                if(keyboard->info.pfn_callback_list.pfn_key_callback != NULL)
+                {
+                    keyboard->info.pfn_callback_list.pfn_key_callback(keyboard, key, LPW_ENUM_KEYBOARD_KEY_EVENT_RELEASE);
+                }
+            }
+        }break;
     }
 }
 
