@@ -9,4 +9,6 @@
 //#include <xkbcommon/xkbcommon-x11.h>
 #include <xcb/xkb.h>
 
+#include <sys/time.h>
+
 #endif
