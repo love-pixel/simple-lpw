@@ -44,7 +44,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "test_mouse-linux"
+            "preLaunchTask": "test_keyboard-linux"
         }
     ]
 }

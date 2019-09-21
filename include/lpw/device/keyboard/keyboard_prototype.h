@@ -13,7 +13,8 @@ typedef struct LpwKeyboardInfo
     DWORD                        pre_time_table[LPW_ENUM_KEYBOARD_KEY_MAX_ENUM];
     DWORD                        time_interval;
 #elif defined( LPW_MACRO_USE_PLATFORM_SDK_XCB )
-
+    clock_t                      pre_time_table[LPW_ENUM_KEYBOARD_KEY_MAX_ENUM];
+    clock_t                      time_interval;
 #endif
     //xcb_timestamp_t         pre_time_table[LPW_ENUM_MOUSE_BUTTON_MAX_ENUM];
 }LpwKeyboardInfo;
@@ -35,3 +36,4 @@ typedef struct LPW_MAKE_HANDLE_PROTOTYPE_NAME(LpwKeyboard)
 extern LpwEnumKeyboardKey lpw_global_keyboard_key_table[LPW_KEYBOARD_MAX_KEY_NUM];
 extern LpwBool lpw_global_is_init_keyboard_key_table;
 static void lpwGlobalMapKeyboardKey();
+extern PFN_LpwPlatformKeyboardKeyCodeCallback lpw_global_platform_keyboard_key_code_callback;

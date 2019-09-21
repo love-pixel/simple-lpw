@@ -10,6 +10,8 @@ LPW_DEFINE_HANDLE(LpwKeyboard)
 typedef void (*PFN_LpwKeyboardKeyCallback)(LpwKeyboard keyboard,LpwEnumKeyboardKey key, LpwEnumKeyboardKeyEvent event);
 //typedef void (*PFN_LpwKeyboardCallback)(LpwKeyboard keyboard,);
 
+typedef void (*PFN_LpwPlatformKeyboardKeyCodeCallback)(uint32_t platform_key_code);
+
 typedef struct LpwKeyboardPfnCallbackList
 {
     PFN_LpwKeyboardKeyCallback pfn_key_callback;
@@ -36,3 +38,7 @@ LpwKeyboard lpwGetKeyboard(LpwDevice device);
 LpwDevice lpwGetDeviceFromKeyboard(LpwKeyboard keyboard);
 
 void lpwSetKeyboardTimeInterval(LpwKeyboard keyboard, uint32_t time_interval);
+
+void lpwPrivateSetGlobalKeyboardKeyMappingCode(uint32_t platform_key_code, LpwEnumKeyboardKey key);
+
+void lpwSetGlobalPlatformKeyboardKeyCodePfnCallback(PFN_LpwPlatformKeyboardKeyCodeCallback pfn_callback);
