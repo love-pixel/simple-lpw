@@ -1,0 +1,10 @@
+#pragma once
+
+typedef enum LpwEnumProcessEventType
+{
+    LPW_ENUM_PROCESS_EVENT_TYPE_NULL,
+    LPW_ENUM_PROCESS_EVENT_TYPE_POLL,
+    LPW_ENUM_PROCESS_EVENT_TYPE_WAIT,
+    //LPW_ENUM_PROCESS_EVENT_TYPE_,
+    LPW_ENUM_PROCESS_EVENT_TYPE_MAX_ENUM,
+}LpwEnumProcessEventType;

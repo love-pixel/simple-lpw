@@ -1,0 +1,20 @@
+#pragma once
+
+typedef enum LpwEnumMouseButton
+{
+    LPW_ENUM_MOUSE_BUTTON_NULL          ,
+    LPW_ENUM_MOUSE_BUTTON_LEFT          ,
+    LPW_ENUM_MOUSE_BUTTON_MIDDLE        ,
+    LPW_ENUM_MOUSE_BUTTON_RIGHT         ,
+    LPW_ENUM_MOUSE_BUTTON_FORWARD       ,
+    LPW_ENUM_MOUSE_BUTTON_BACKWARD      ,
+    LPW_ENUM_MOUSE_BUTTON_MAX_ENUM      ,
+}LpwEnumMouseButton;
+
+typedef enum LpwEnumMouseButtonState
+{
+    LPW_ENUM_MOUSE_BUTTON_STATE_NULL    ,
+    LPW_ENUM_MOUSE_BUTTON_STATE_ACTIVE  ,
+    LPW_ENUM_MOUSE_BUTTON_STATE_INACTIVE,
+    LPW_ENUM_MOUSE_BUTTON_STATE_MAX_ENUM,
+}LpwEnumMouseButtonState;
