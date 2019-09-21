@@ -11,7 +11,7 @@
 
 LRESULT CALLBACK _lpwDeviceEventHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam )
 {
-    LpwDevice device = (LpwDevice)GetWindowLong(hWnd, GWLP_USERDATA);
+    LpwDevice device = (LpwDevice)GetWindowLongPtr(hWnd, GWLP_USERDATA);
     if(device == LPW_NULL_HANDLE) return DefWindowProc(hWnd, uMsg, wParam, lParam);
     LpwWindow window = device->window;
     LpwMouse mouse = device->mouse;
