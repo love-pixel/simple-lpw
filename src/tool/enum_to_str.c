@@ -148,6 +148,51 @@ const char* lpwToolEnumKeyboardKeyToStr(LpwEnumKeyboardKey key, const char** hea
         case LPW_ENUM_KEYBOARD_KEY_HOME         :   return "HOME" ;
         case LPW_ENUM_KEYBOARD_KEY_END          :   return "END"  ;
         //page key end
+
+        
+        //extension for user key begin
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_0   :   return "EXT_USER_0" ;
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_1   :   return "EXT_USER_1" ;
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_2   :   return "EXT_USER_2" ;
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_3   :   return "EXT_USER_3" ;
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_4   :   return "EXT_USER_4" ;
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_5   :   return "EXT_USER_5" ;
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_6   :   return "EXT_USER_6" ;
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_7   :   return "EXT_USER_7" ;
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_8   :   return "EXT_USER_8" ;
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_9   :   return "EXT_USER_9" ;
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_10  :   return "EXT_USER_10";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_11  :   return "EXT_USER_11";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_12  :   return "EXT_USER_12";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_13  :   return "EXT_USER_13";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_14  :   return "EXT_USER_14";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_15  :   return "EXT_USER_15";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_16  :   return "EXT_USER_16";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_17  :   return "EXT_USER_17";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_18  :   return "EXT_USER_18";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_19  :   return "EXT_USER_19";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_20  :   return "EXT_USER_20";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_21  :   return "EXT_USER_21";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_22  :   return "EXT_USER_22";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_23  :   return "EXT_USER_23";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_24  :   return "EXT_USER_24";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_25  :   return "EXT_USER_25";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_26  :   return "EXT_USER_26";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_27  :   return "EXT_USER_27";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_28  :   return "EXT_USER_28";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_29  :   return "EXT_USER_29";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_30  :   return "EXT_USER_30";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_31  :   return "EXT_USER_31";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_32  :   return "EXT_USER_32";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_33  :   return "EXT_USER_33";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_34  :   return "EXT_USER_34";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_35  :   return "EXT_USER_35";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_36  :   return "EXT_USER_36";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_37  :   return "EXT_USER_37";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_38  :   return "EXT_USER_38";
+        case LPW_ENUM_KEYBOARD_KEY_EXT_USER_39  :   return "EXT_USER_39";
+        //extension for user key end
+
         default                                 :   return "Uknown";
     }
 }
