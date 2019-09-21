@@ -29,9 +29,9 @@ void lpwDestroyWindow(LpwWindow window);
 void lpwSetWindowUserPtr(LpwWindow window, const void* src_ptr);
 void* lpwGetWindowUserPtr(LpwWindow window);
 
-LpwVec2_i32 lpwGetWindowPos(LpwWindow window);
+void lpwGetWindowPos(LpwWindow window, LpwVec2_i32* dst_ptr);
 
-LpwVec2_ui32 lpwGetWindowSize(LpwWindow window);
+void lpwGetWindowSize(LpwWindow window, LpwVec2_ui32* dst_ptr);
 
 const char* lpwGetWindowName(LpwWindow window);
 

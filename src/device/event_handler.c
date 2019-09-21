@@ -2,6 +2,7 @@
 #include "../../include/lpw/device/device_prototype.h"
 #include "../../include/lpw/device/window/window_prototype.h"
 #include "../../include/lpw/device/mouse/mouse_prototype.h"
+#include "../../include/lpw/device/keyboard/keyboard_prototype.h"
 #include "../../include/lpw/device/platform_data_prototype.h"
 
 #include <assert.h>
@@ -14,6 +15,7 @@ LRESULT CALLBACK _lpwDeviceEventHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
     if(device == LPW_NULL_HANDLE) return DefWindowProc(hWnd, uMsg, wParam, lParam);
     LpwWindow window = device->window;
     LpwMouse mouse = device->mouse;
+    LpwKeyboard keyboard = device->keyboard;
     switch(uMsg)
     {
         //window
@@ -148,6 +150,41 @@ LRESULT CALLBACK _lpwDeviceEventHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
         }break;
 
         //keyboard
+        case WM_KEYDOWN:
+        case WM_SYSKEYDOWN:{
+            if(keyboard != LPW_NULL_HANDLE)
+            {
+                LpwEnumKeyboardKey key = lpw_global_keyboard_key_table[wParam];
+                if( (keyboard->info.pfn_callback_list.pfn_key_callback != NULL) &&
+                    (keyboard->info.key_state_table[key] != LPW_ENUM_KEYBOARD_KEY_STATE_ACTIVE))
+                {
+                    DWORD current_time = GetTickCount();
+                    DWORD time_interval = current_time - keyboard->info.pre_time_table[key];
+                    if( (time_interval < keyboard->info.time_interval) && (time_interval > 0))
+                    {
+                        keyboard->info.pfn_callback_list.pfn_key_callback(keyboard, key, LPW_ENUM_KEYBOARD_KEY_EVENT_DOUBLE);
+                    }
+                    else
+                    {
+                        keyboard->info.pfn_callback_list.pfn_key_callback(keyboard, key, LPW_ENUM_KEYBOARD_KEY_EVENT_PRESS);
+                    }
+                    keyboard->info.pre_time_table[key] = current_time;
+                }
+                keyboard->info.key_state_table[key] = LPW_ENUM_KEYBOARD_KEY_STATE_ACTIVE;
+            }
+        }break;
+        case WM_KEYUP:
+        case WM_SYSKEYUP:{
+            if(keyboard != LPW_NULL_HANDLE)
+            {
+                LpwEnumKeyboardKey key = lpw_global_keyboard_key_table[wParam];
+                keyboard->info.key_state_table[key] = LPW_ENUM_KEYBOARD_KEY_STATE_INACTIVE;
+                if(keyboard->info.pfn_callback_list.pfn_key_callback != NULL)
+                {
+                    keyboard->info.pfn_callback_list.pfn_key_callback(keyboard, key, LPW_ENUM_KEYBOARD_KEY_EVENT_RELEASE);
+                }
+            }
+        }break;
     }
     return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }

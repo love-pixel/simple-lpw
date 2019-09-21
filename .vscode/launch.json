@@ -23,7 +23,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "test_mouse-windows"
+            "preLaunchTask": "test_keyboard-windows"
         },
         {
             "name": "linux",
