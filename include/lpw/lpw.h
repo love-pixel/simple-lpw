@@ -1,6 +1,6 @@
 #pragma once
 
-#if defined( _cplusplus )
+#if defined( __cplusplus )
 extern "C" {
 #endif
 
@@ -18,7 +18,8 @@ extern "C" {
 #include "device/device.h"
 #include "device/window/window.h"
 #include "device/mouse/mouse.h"
+#include "device/keyboard/keyboard.h"
 
-#if defined( _cplusplus )
+#if defined( __cplusplus )
 }
 #endif
