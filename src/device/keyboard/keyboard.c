@@ -114,10 +114,96 @@ static void lpwGlobalMapKeyboardKey()
         lpw_global_keyboard_key_table[i] = LPW_ENUM_KEYBOARD_KEY_NULL;
     }
 
-    lpw_global_keyboard_key_table['W'] = LPW_ENUM_KEYBOARD_KEY_W;
-    lpw_global_keyboard_key_table['A'] = LPW_ENUM_KEYBOARD_KEY_A;
-    lpw_global_keyboard_key_table['S'] = LPW_ENUM_KEYBOARD_KEY_S;
-    lpw_global_keyboard_key_table['D'] = LPW_ENUM_KEYBOARD_KEY_D;
+    //number begin
+    lpw_global_keyboard_key_table['0'       ] = LPW_ENUM_KEYBOARD_KEY_NUM_0;
+    lpw_global_keyboard_key_table['1'       ] = LPW_ENUM_KEYBOARD_KEY_NUM_1;
+    lpw_global_keyboard_key_table['2'       ] = LPW_ENUM_KEYBOARD_KEY_NUM_2;
+    lpw_global_keyboard_key_table['3'       ] = LPW_ENUM_KEYBOARD_KEY_NUM_3;
+    lpw_global_keyboard_key_table['4'       ] = LPW_ENUM_KEYBOARD_KEY_NUM_4;
+    lpw_global_keyboard_key_table['5'       ] = LPW_ENUM_KEYBOARD_KEY_NUM_5;
+    lpw_global_keyboard_key_table['6'       ] = LPW_ENUM_KEYBOARD_KEY_NUM_6;
+    lpw_global_keyboard_key_table['7'       ] = LPW_ENUM_KEYBOARD_KEY_NUM_7;
+    lpw_global_keyboard_key_table['8'       ] = LPW_ENUM_KEYBOARD_KEY_NUM_8;
+    lpw_global_keyboard_key_table['9'       ] = LPW_ENUM_KEYBOARD_KEY_NUM_9;
+    lpw_global_keyboard_key_table[VK_NUMPAD0] = LPW_ENUM_KEYBOARD_KEY_NUMPAD_0;
+    lpw_global_keyboard_key_table[VK_NUMPAD1] = LPW_ENUM_KEYBOARD_KEY_NUMPAD_1;
+    lpw_global_keyboard_key_table[VK_NUMPAD2] = LPW_ENUM_KEYBOARD_KEY_NUMPAD_2;
+    lpw_global_keyboard_key_table[VK_NUMPAD3] = LPW_ENUM_KEYBOARD_KEY_NUMPAD_3;
+    lpw_global_keyboard_key_table[VK_NUMPAD4] = LPW_ENUM_KEYBOARD_KEY_NUMPAD_4;
+    lpw_global_keyboard_key_table[VK_NUMPAD5] = LPW_ENUM_KEYBOARD_KEY_NUMPAD_5;
+    lpw_global_keyboard_key_table[VK_NUMPAD6] = LPW_ENUM_KEYBOARD_KEY_NUMPAD_6;
+    lpw_global_keyboard_key_table[VK_NUMPAD7] = LPW_ENUM_KEYBOARD_KEY_NUMPAD_7;
+    lpw_global_keyboard_key_table[VK_NUMPAD8] = LPW_ENUM_KEYBOARD_KEY_NUMPAD_8;
+    lpw_global_keyboard_key_table[VK_NUMPAD9] = LPW_ENUM_KEYBOARD_KEY_NUMPAD_9;
+    //lpw_global_keyboard_key_table[''] = LPW_ENUM_KEYBOARD_KEY;
+    //number end
+    //alphabet begin
+    lpw_global_keyboard_key_table['A'       ] = LPW_ENUM_KEYBOARD_KEY_A;
+    lpw_global_keyboard_key_table['B'       ] = LPW_ENUM_KEYBOARD_KEY_B;
+    lpw_global_keyboard_key_table['C'       ] = LPW_ENUM_KEYBOARD_KEY_C;
+    lpw_global_keyboard_key_table['D'       ] = LPW_ENUM_KEYBOARD_KEY_D;
+    lpw_global_keyboard_key_table['E'       ] = LPW_ENUM_KEYBOARD_KEY_E;
+    lpw_global_keyboard_key_table['F'       ] = LPW_ENUM_KEYBOARD_KEY_F;
+    lpw_global_keyboard_key_table['G'       ] = LPW_ENUM_KEYBOARD_KEY_G;
+    lpw_global_keyboard_key_table['H'       ] = LPW_ENUM_KEYBOARD_KEY_H;
+    lpw_global_keyboard_key_table['I'       ] = LPW_ENUM_KEYBOARD_KEY_I;
+    lpw_global_keyboard_key_table['J'       ] = LPW_ENUM_KEYBOARD_KEY_J;
+    lpw_global_keyboard_key_table['K'       ] = LPW_ENUM_KEYBOARD_KEY_K;
+    lpw_global_keyboard_key_table['L'       ] = LPW_ENUM_KEYBOARD_KEY_L;
+    lpw_global_keyboard_key_table['M'       ] = LPW_ENUM_KEYBOARD_KEY_M;
+    lpw_global_keyboard_key_table['N'       ] = LPW_ENUM_KEYBOARD_KEY_N;
+    lpw_global_keyboard_key_table['O'       ] = LPW_ENUM_KEYBOARD_KEY_O;
+    lpw_global_keyboard_key_table['P'       ] = LPW_ENUM_KEYBOARD_KEY_P;
+    lpw_global_keyboard_key_table['Q'       ] = LPW_ENUM_KEYBOARD_KEY_Q;
+    lpw_global_keyboard_key_table['R'       ] = LPW_ENUM_KEYBOARD_KEY_R;
+    lpw_global_keyboard_key_table['S'       ] = LPW_ENUM_KEYBOARD_KEY_S;
+    lpw_global_keyboard_key_table['T'       ] = LPW_ENUM_KEYBOARD_KEY_T;
+    lpw_global_keyboard_key_table['U'       ] = LPW_ENUM_KEYBOARD_KEY_U;
+    lpw_global_keyboard_key_table['V'       ] = LPW_ENUM_KEYBOARD_KEY_V;
+    lpw_global_keyboard_key_table['W'       ] = LPW_ENUM_KEYBOARD_KEY_W;
+    lpw_global_keyboard_key_table['X'       ] = LPW_ENUM_KEYBOARD_KEY_X;
+    lpw_global_keyboard_key_table['Y'       ] = LPW_ENUM_KEYBOARD_KEY_Y;
+    lpw_global_keyboard_key_table['Z'       ] = LPW_ENUM_KEYBOARD_KEY_Z;
+    //lpw_global_keyboard_key_table[''] = LPW_ENUM_KEYBOARD_KEY;
+    //alphabet end
+    //function key begin
+    lpw_global_keyboard_key_table[VK_F1     ] = LPW_ENUM_KEYBOARD_KEY_F1 ;
+    lpw_global_keyboard_key_table[VK_F2     ] = LPW_ENUM_KEYBOARD_KEY_F2 ;
+    lpw_global_keyboard_key_table[VK_F3     ] = LPW_ENUM_KEYBOARD_KEY_F3 ;
+    lpw_global_keyboard_key_table[VK_F4     ] = LPW_ENUM_KEYBOARD_KEY_F4 ;
+    lpw_global_keyboard_key_table[VK_F5     ] = LPW_ENUM_KEYBOARD_KEY_F5 ;
+    lpw_global_keyboard_key_table[VK_F6     ] = LPW_ENUM_KEYBOARD_KEY_F6 ;
+    lpw_global_keyboard_key_table[VK_F7     ] = LPW_ENUM_KEYBOARD_KEY_F7 ;
+    lpw_global_keyboard_key_table[VK_F8     ] = LPW_ENUM_KEYBOARD_KEY_F8 ;
+    lpw_global_keyboard_key_table[VK_F9     ] = LPW_ENUM_KEYBOARD_KEY_F9 ;
+    lpw_global_keyboard_key_table[VK_F10    ] = LPW_ENUM_KEYBOARD_KEY_F10;
+    lpw_global_keyboard_key_table[VK_F11    ] = LPW_ENUM_KEYBOARD_KEY_F11;
+    lpw_global_keyboard_key_table[VK_F12    ] = LPW_ENUM_KEYBOARD_KEY_F12;
+    lpw_global_keyboard_key_table[VK_F13    ] = LPW_ENUM_KEYBOARD_KEY_F13;
+    lpw_global_keyboard_key_table[VK_F14    ] = LPW_ENUM_KEYBOARD_KEY_F14;
+    lpw_global_keyboard_key_table[VK_F15    ] = LPW_ENUM_KEYBOARD_KEY_F15;
+    lpw_global_keyboard_key_table[VK_F16    ] = LPW_ENUM_KEYBOARD_KEY_F16;
+    lpw_global_keyboard_key_table[VK_F17    ] = LPW_ENUM_KEYBOARD_KEY_F17;
+    lpw_global_keyboard_key_table[VK_F18    ] = LPW_ENUM_KEYBOARD_KEY_F18;
+    lpw_global_keyboard_key_table[VK_F19    ] = LPW_ENUM_KEYBOARD_KEY_F19;
+    lpw_global_keyboard_key_table[VK_F20    ] = LPW_ENUM_KEYBOARD_KEY_F20;
+    lpw_global_keyboard_key_table[VK_F21    ] = LPW_ENUM_KEYBOARD_KEY_F21;
+    lpw_global_keyboard_key_table[VK_F22    ] = LPW_ENUM_KEYBOARD_KEY_F22;
+    lpw_global_keyboard_key_table[VK_F23    ] = LPW_ENUM_KEYBOARD_KEY_F23;
+    lpw_global_keyboard_key_table[VK_F24    ] = LPW_ENUM_KEYBOARD_KEY_F24;
+    //function key end
+    //arrow key begin
+    lpw_global_keyboard_key_table[VK_LEFT   ] = LPW_ENUM_KEYBOARD_KEY_LEFT ;
+    lpw_global_keyboard_key_table[VK_RIGHT  ] = LPW_ENUM_KEYBOARD_KEY_RIGHT;
+    lpw_global_keyboard_key_table[VK_UP     ] = LPW_ENUM_KEYBOARD_KEY_UP   ;
+    lpw_global_keyboard_key_table[VK_DOWN   ] = LPW_ENUM_KEYBOARD_KEY_DOWN ;
+    //arrow key end
+    //page key begin
+    lpw_global_keyboard_key_table[VK_PRIOR	] = LPW_ENUM_KEYBOARD_KEY_PRIOR;
+    lpw_global_keyboard_key_table[VK_NEXT	] = LPW_ENUM_KEYBOARD_KEY_NEXT ;
+    lpw_global_keyboard_key_table[VK_HOME	] = LPW_ENUM_KEYBOARD_KEY_HOME ;
+    lpw_global_keyboard_key_table[VK_END    ] = LPW_ENUM_KEYBOARD_KEY_END  ;
+    //page key end
     //lpw_global_keyboard_key_table[] = LPW_ENUM_KEYBOARD_KEY;
 
 
