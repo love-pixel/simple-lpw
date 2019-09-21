@@ -27,7 +27,7 @@ void platformKeyCodeCallback(uint32_t platform_key_code)
 int main()
 {
 #if defined( LPW_MACRO_USE_PLATFORM_SDK_WINDOWS )
-    lpwPrivateSetGlobalKeyboardKeyMappingCode();
+    lpwPrivateSetGlobalKeyboardKeyMappingCode(8, LPW_ENUM_KEYBOARD_KEY_EXT_USER_0);//map the backspace(in windows the code is 8) key to EXT_USER_0
 #elif defined( LPW_MACRO_USE_PLATFORM_SDK_XCB )
     lpwPrivateSetGlobalKeyboardKeyMappingCode(22, LPW_ENUM_KEYBOARD_KEY_EXT_USER_0);//map the backspace(in xcb the code is 22) key to EXT_USER_0
 #endif
