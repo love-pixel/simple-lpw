@@ -2,27 +2,20 @@
 #include "../../include/lpw/device/window/window.h"
 #include "../../include/lpw/device/keyboard/keyboard.h"
 
+#include "../../include/lpw/tool/enum_to_str.h"
+
 #include <malloc.h>
 #include <stdio.h>
 
 void keyboardKeyCallback(LpwKeyboard keyboard, LpwEnumKeyboardKey key, LpwEnumKeyboardKeyEvent event)
 {
-    const char* ckey = "Unknown";
-    const char* cevent = "Unknown";
-    switch(key)
-    {
-        case LPW_ENUM_KEYBOARD_KEY_W: ckey = "W";break;
-        case LPW_ENUM_KEYBOARD_KEY_A: ckey = "A";break;
-        case LPW_ENUM_KEYBOARD_KEY_S: ckey = "S";break;
-        case LPW_ENUM_KEYBOARD_KEY_D: ckey = "D";break;
-    }
-    switch(event)
-    {
-        case LPW_ENUM_KEYBOARD_KEY_EVENT_PRESS: cevent = "PRESS";break;
-        case LPW_ENUM_KEYBOARD_KEY_EVENT_RELEASE: cevent = "RELEASE";break;
-        case LPW_ENUM_KEYBOARD_KEY_EVENT_DOUBLE: cevent = "DOUBLE";break;
-    }
-    printf("Keyboard Callback: Key(%s,%s)\n",ckey, cevent);
+    const char* key_head = "";
+    lpwToolEnumKeyboardKeyToStr(key, &key_head);
+    const char* event_head = "";
+    lpwToolEnumKeyboardKeyEventToStr(event, &event_head);
+
+    printf("Keyboard Callback: (%s,%s)Key(%s,%s)\n",
+        key_head, event_head, lpwToolEnumKeyboardKeyToStr(key, NULL), lpwToolEnumKeyboardKeyEventToStr(event,NULL));
 }
 
 int main()
