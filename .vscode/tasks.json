@@ -91,6 +91,27 @@
                 "_DEBUG",
                 "-lgdi32"
             ]
+        },
+        {
+            "label": "test_keyboard-linux",
+            "type": "shell",
+            "command": "gcc",
+            "args":[
+                "-g",
+                "src/device/device.c",
+                "src/device/event_handler.c",
+                "src/device/window/window.c",
+                "src/device/mouse/mouse.c",
+                "src/device/keyboard/keyboard.c",
+                "src/tool/enum_to_str.c",
+                "example/keyboard/test_keyboard.c",
+                "-o",
+                "example/a.out",
+                "-D",
+                "_DEBUG",
+                "-lxcb",
+                "-lxcb-xkb"
+            ]
         }
     ],
     "version": "2.0.0"
