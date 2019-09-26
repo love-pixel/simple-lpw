@@ -11,6 +11,9 @@
 
 LRESULT CALLBACK _lpwDeviceEventHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam )
 {
+    if(lpw_global_platform_event_code_callback != NULL){
+        lpw_global_platform_event_code_callback((uint32_t)uMsg);
+    }
     LpwDevice device = (LpwDevice)GetWindowLongPtr(hWnd, GWLP_USERDATA);
     if(device == LPW_NULL_HANDLE) return DefWindowProc(hWnd, uMsg, wParam, lParam);
     LpwWindow window = device->window;
@@ -198,6 +201,9 @@ LRESULT CALLBACK _lpwDeviceEventHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
 void _lpwDeviceEventHandler(const xcb_generic_event_t* xcb_event, LpwDevice device)
 {
     uint8_t message = xcb_event->response_type & ~0x80;//make sure it's value in 0~127
+    if(lpw_global_platform_event_code_callback != NULL){
+        lpw_global_platform_event_code_callback((uint32_t)message);
+    }
     LpwWindow window = device->window;
     LpwMouse mouse = device->mouse;
     LpwKeyboard keyboard = device->keyboard;

@@ -7,6 +7,8 @@
 
 LPW_DEFINE_HANDLE(LpwDevice)
 
+typedef void (*PFN_LpwPlatformEventCodeCallback)(uint32_t platform_event_code);
+
 typedef struct LpwDeviceCreateInfo
 {
     LpwDevice          root;
@@ -24,3 +26,5 @@ void lpwSetDeviceUserPtr(LpwDevice device, const void* src_ptr);
 void* lpwGetDeviceUserPtr(LpwDevice device);
 
 LpwPlatformData lpwGetDevicePlatformData(LpwDevice device);
+
+void lpwSetGlobalPlatformEventCodePfnCallback(PFN_LpwPlatformEventCodeCallback pfn_callback);

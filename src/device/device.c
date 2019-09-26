@@ -133,3 +133,10 @@ LpwPlatformData lpwGetDevicePlatformData(LpwDevice device)
     assert(device != LPW_NULL_HANDLE);
     return device->platform_data;
 }
+
+PFN_LpwPlatformEventCodeCallback lpw_global_platform_event_code_callback = NULL;
+
+void lpwSetGlobalPlatformEventCodePfnCallback(PFN_LpwPlatformEventCodeCallback pfn_callback)
+{
+    lpw_global_platform_event_code_callback = pfn_callback;
+}
