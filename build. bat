@@ -1,3 +1,0 @@
-mkdir build
-cd build
-gcc -g ../src/tool/enum_to_str.c ../src/device/device.c ../src/device/event_handler.c ../src/device/window/window.c ../src/device/mouse/mouse.c ../src/device/keyboard/keyboard.c ../example/keyboard/test_keyboard.c -lgdi32 -o keyboard.exe 
