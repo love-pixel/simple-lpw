@@ -2,6 +2,7 @@
     "files.associations": {
         "device_prototype.h": "c",
         "window.h": "c",
-        "platform_sdk.h": "c"
+        "platform_sdk.h": "c",
+        "stdlib.h": "c"
     }
 }
