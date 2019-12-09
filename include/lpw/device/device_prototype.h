@@ -17,3 +17,5 @@ typedef struct LPW_MAKE_HANDLE_PROTOTYPE_NAME(LpwDevice)
     LpwMouse        mouse;
     LpwKeyboard     keyboard;
 }LPW_MAKE_HANDLE_PROTOTYPE_NAME(LpwDevice);
+
+extern PFN_LpwPlatformEventCodeCallback lpw_global_platform_event_code_callback;

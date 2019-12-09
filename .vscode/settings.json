@@ -4,5 +4,6 @@
         "window.h": "c",
         "platform_sdk.h": "c",
         "stdlib.h": "c"
-    }
+    },
+    "cmake.configureOnOpen": false
 }
