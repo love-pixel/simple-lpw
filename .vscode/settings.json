@@ -3,5 +3,6 @@
         "device_prototype.h": "c",
         "window.h": "c",
         "platform_sdk.h": "c"
-    }
+    },
+    "cmake.configureOnOpen": false
 }

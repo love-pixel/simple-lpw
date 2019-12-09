@@ -24,6 +24,17 @@ void platformKeyCodeCallback(uint32_t platform_key_code)
     printf("Platform Key Code: %d\n", platform_key_code);
 }
 
+void platformEventCodeCallback(uint32_t platform_event_code)
+{
+    if(0x0112 == platform_event_code){
+        printf("WM_SYSCOMMAND\n");
+    }
+    if(0x0013 == platform_event_code){
+        printf("WM_QUERYOPEN\n");
+    }
+    //printf("Platform Event Code: %d\n", platform_event_code);
+}
+
 int main()
 {
 #if defined( LPW_MACRO_USE_PLATFORM_SDK_WINDOWS )
@@ -32,6 +43,7 @@ int main()
     lpwPrivateSetGlobalKeyboardKeyMappingCode(22, LPW_ENUM_KEYBOARD_KEY_EXT_USER_0);//map the backspace(in xcb the code is 22) key to EXT_USER_0
 #endif
     lpwSetGlobalPlatformKeyboardKeyCodePfnCallback(platformKeyCodeCallback);
+    lpwSetGlobalPlatformEventCodePfnCallback(platformEventCodeCallback);
 
     LpwDevice device = lpwCreateDevice(NULL);
     LpwWindowCreateInfo window_ci;
