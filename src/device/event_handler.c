@@ -84,7 +84,20 @@ LRESULT CALLBACK _lpwDeviceEventHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
         case WM_RBUTTONDBLCLK:{
             lpwProcessMouseButtonEvent(mouse, LPW_ENUM_MOUSE_BUTTON_RIGHT, LPW_ENUM_MOUSE_BUTTON_EVENT_DOUBLE);
         }break;
-
+/**
+ * #if (_WIN32_WINNT >= 0x0500)
+ * #define WM_XBUTTONDOWN 523
+ * #define WM_XBUTTONUP 524
+ * #define WM_XBUTTONDBLCLK 525
+ * #define WM_MOUSELAST 525
+ * #else
+ * 
+ * #if (_WIN32_WINNT >= 0x0500)
+ * #define VK_XBUTTON1	5
+ * #define VK_XBUTTON2	6
+ * #endif
+*/
+#if (_WIN32_WINNT >= 0x0500)
         case WM_XBUTTONDOWN:{
             LpwEnumMouseButton button = LPW_ENUM_MOUSE_BUTTON_NULL;
             if ((HIWORD(wParam)) == XBUTTON2)
@@ -112,6 +125,7 @@ LRESULT CALLBACK _lpwDeviceEventHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
                 button = LPW_ENUM_MOUSE_BUTTON_BACKWARD;
             lpwProcessMouseButtonEvent(mouse, button, LPW_ENUM_MOUSE_BUTTON_EVENT_DOUBLE);
         }break;
+#endif
 
         case WM_MOUSEMOVE:{
             if(mouse != LPW_NULL_HANDLE)

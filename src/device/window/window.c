@@ -7,6 +7,7 @@
 #include <assert.h>
 #include <malloc.h>
 #include <string.h>
+#include <stdio.h>
 
 void _lpwCreateNativeWindow(LpwWindow window);
 void _lpwDestroyNativeWindow(LpwWindow window);
@@ -134,6 +135,15 @@ uint32_t _lpwGenerateUniqueInteger()
     return lpw_unique_integer;
 }
 
+uint32_t _getNumberCount(uint32_t number){
+    uint32_t count = 0;
+    while(number = (number / 10)){
+        ++count;
+    }
+    ++count;
+    return count;
+}
+
 void _lpwCreateNativeWindow(LpwWindow window)
 {
     LpwPlatformData platform_data = window->root_device->platform_data;
@@ -141,9 +151,12 @@ void _lpwCreateNativeWindow(LpwWindow window)
 	{
 		static const char* lpw_pre_class_name = "Love-Pixel-Window_CLASS_NAME_";
 		uint32_t lpw_unique_integer = _lpwGenerateUniqueInteger();
-		char* lpw_class_name = (char*)malloc(sizeof(char) * (lpw_unique_integer / 10 + 2));								/* Memory Leak Warning!!!! */	//Resolved
-		itoa(lpw_unique_integer, lpw_class_name, 10);
-		
+		char* lpw_class_name = (char*)malloc(sizeof(char) * (_getNumberCount(lpw_unique_integer) + 1));								/* Memory Leak Warning!!!! */	//Resolved
+		sprintf(lpw_class_name,"%ld",lpw_unique_integer);// itoa
+        //printf("ID %s\n", lpw_class_name);
+        //itoa(lpw_unique_integer, lpw_class_name, 10);
+        //printf("%d is %d\n", lpw_unique_integer, _getNumberCount(lpw_unique_integer));
+
 		platform_data->wnd_class_name
 			= (char*)malloc(sizeof(char) * strlen(lpw_pre_class_name) + strlen(lpw_class_name) + 1);					/* Memory Leak Warning!!!! */	//Resolved
 
